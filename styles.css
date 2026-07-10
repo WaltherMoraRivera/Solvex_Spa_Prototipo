@@ -1,0 +1,422 @@
+/* =========================================
+   1. VARIABLES GLOBALES (Paleta Solvex)
+========================================= */
+:root {
+    --azul-profundo: #0C447C;
+    --verde-turquesa: #5DCAA5;
+    --blanco: #FFFFFF;
+    --gris-fondo: #F8F9FA;
+    --texto-oscuro: #2D3748;
+    --fuente-principal: 'Inter', sans-serif;
+}
+
+/* =========================================
+   2. RESETEO BÁSICO
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth; /* Para que al hacer clic en el menú, baje suavemente */
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--gris-fondo);
+    color: var(--texto-oscuro);
+    line-height: 1.6;
+}
+
+/* =========================================
+   3. MENÚ DE NAVEGACIÓN (HEADER)
+========================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--blanco);
+    padding: 20px 5%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h1 {
+    color: var(--azul-profundo);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: var(--verde-turquesa);
+    font-weight: 400;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--azul-profundo);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: var(--verde-turquesa);
+}
+
+/* Botón destacado "Cotizar" */
+.btn-contacto {
+    background-color: var(--verde-turquesa);
+    color: var(--blanco) !important;
+    padding: 10px 24px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-contacto:hover {
+    background-color: #4cb894; /* Tono más oscuro para el efecto hover */
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   4. HERO SECTION (Inicio)
+========================================= */
+.hero {
+    /* Fondo con degradado usando el Azul Profundo de Solvex */
+    background: linear-gradient(135deg, var(--azul-profundo) 0%, #1A5EAA 100%);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+    color: var(--blanco);
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.btn-principal {
+    background-color: var(--verde-turquesa);
+    color: var(--blanco);
+    text-decoration: none;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.btn-principal:hover {
+    background-color: #4cb894;
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   5. SECCIÓN SERVICIOS
+========================================= */
+.servicios {
+    padding: 80px 5%;
+    background-color: var(--gris-fondo);
+}
+
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.titulo-seccion {
+    text-align: center;
+    color: var(--azul-profundo);
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    font-weight: 700;
+}
+
+.grid-servicios {
+    display: grid;
+    /* CSS Grid mágico: Se adapta a celular (1 columna) y escritorio (hasta 4) */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.card-servicio {
+    background-color: var(--blanco);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto al pasar el mouse por encima de las tarjetas */
+.card-servicio:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.icono-servicio {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.card-servicio h4 {
+    color: var(--azul-profundo);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.card-servicio p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   6. CASO DE ÉXITO (INAE)
+========================================= */
+.caso-exito {
+    padding: 80px 5%;
+    background-color: var(--blanco);
+}
+
+.grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.texto-izq {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.badge {
+    background-color: var(--verde-turquesa);
+    color: var(--blanco);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.caso-texto p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.lista-beneficios {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.lista-beneficios li {
+    margin-bottom: 10px;
+    color: var(--azul-profundo);
+    font-weight: 600;
+}
+
+.mockup-placeholder {
+    background-color: #E2E8F0;
+    height: 350px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748B;
+    border: 2px dashed #CBD5E1;
+    text-align: center;
+    padding: 20px;
+}
+
+/* =========================================
+   7. SECCIÓN NOSOTROS
+========================================= */
+.nosotros {
+    padding: 80px 5%;
+    background-color: var(--azul-profundo);
+    color: var(--blanco);
+}
+
+.nosotros .titulo-seccion {
+    color: var(--verde-turquesa);
+}
+
+.text-center {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.nosotros-texto {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+/* =========================================
+   8. SECCIÓN CONTACTO
+========================================= */
+.contacto {
+    padding: 80px 5%;
+    background-color: var(--gris-fondo);
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--blanco);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--azul-profundo);
+    font-weight: 600;
+}
+
+.input-group input, 
+.input-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    font-family: var(--fuente-principal);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus, 
+.input-group textarea:focus {
+    outline: none;
+    border-color: var(--verde-turquesa);
+}
+
+.form-btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-family: var(--fuente-principal);
+}
+
+/* =========================================
+   9. FOOTER
+========================================= */
+.footer {
+    background-color: #082F56; /* Un tono aún más oscuro de azul */
+    color: var(--blanco);
+    padding: 50px 5% 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+.footer-logo h2 {
+    font-size: 1.5rem;
+}
+
+.footer-logo span {
+    color: var(--verde-turquesa);
+}
+
+.footer-info {
+    text-align: right;
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+/* =========================================
+   10. MEDIA QUERIES (Responsivo para Celulares)
+========================================= */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 15px 5%;
+        gap: 15px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .nav-links li a {
+        font-size: 0.9rem;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+    
+    .grid-2-col {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .footer-info {
+        text-align: center;
+    }
+}
+
+.img-inae {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.img-inae:hover {
+    transform: scale(1.02); /* Hace un zoom muy suave al pasar el mouse */
+}

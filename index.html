@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solvex SpA | Soluciones Tecnológicas a Medida</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <h1>SOLVEX <span>SpA</span></h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#caso-exito">Proyecto INAE</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto" class="btn-contacto">Cotizar</a></li>
+            </ul>
+        </nav>
+    </header>
+<!-- ================= HERO SECTION (INICIO) ================= -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h2>Soluciones tecnológicas a medida</h2>
+            <p>Transformamos problemas complejos en oportunidades de mejora, creando software de calidad que optimiza los procesos y la transformación digital de su organización.</p>
+            <a href="#contacto" class="btn-principal">Iniciar Proyecto</a>
+        </div>
+    </section>
+
+    <!-- ================= SECCIÓN SERVICIOS ================= -->
+    <section id="servicios" class="servicios">
+        <div class="contenedor">
+            <h3 class="titulo-seccion">Nuestros Servicios</h3>
+            <div class="grid-servicios">
+                
+                <div class="card-servicio">
+                    <div class="icono-servicio">💻</div>
+                    <h4>Desarrollo a Medida</h4>
+                    <p>Creamos plataformas robustas y eficientes diseñadas específicamente para resolver los desafíos únicos de su empresa.</p>
+                </div>
+
+                <div class="card-servicio">
+                    <div class="icono-servicio">📱</div>
+                    <h4>Aplicaciones Web y Móviles</h4>
+                    <p>Diseño y desarrollo de aplicaciones intuitivas, escalables y multiplataforma para acercarlo a sus usuarios.</p>
+                </div>
+
+                <div class="card-servicio">
+                    <div class="icono-servicio">⚙️</div>
+                    <h4>Integración de Sistemas</h4>
+                    <p>Conectamos sus plataformas actuales para lograr un flujo de información automatizado y sin interrupciones.</p>
+                </div>
+
+                <div class="card-servicio">
+                    <div class="icono-servicio">📊</div>
+                    <h4>Consultoría Tecnológica</h4>
+                    <p>Asesoría experta para guiar la transformación digital de su institución con estrategias modernas y basadas en datos.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<!-- ================= SECCIÓN CASO DE ÉXITO (INAE) ================= -->
+    <section id="caso-exito" class="caso-exito">
+        <div class="contenedor grid-2-col">
+            <div class="caso-texto">
+                <span class="badge">Primer Proyecto Destacado</span>
+                <h3 class="titulo-seccion texto-izq">INAE: Prevención de Deserción Estudiantil</h3>
+                <p>Como gran muestra de nuestra capacidad resolutiva, desarrollamos INAE, una plataforma integral diseñada para instituciones de educación superior.</p>
+                <p>Esta solución combina monitoreo emocional, organización académica y mentorías entre pares, permitiendo a las Direcciones de Asuntos Estudiantiles (DAE) detectar alertas de riesgo en tiempo real y actuar de manera preventiva.</p>
+                <ul class="lista-beneficios">
+                    <li>✔️ Dashboard analítico para administradores</li>
+                    <li>✔️ Gestión segura y confidencial de datos</li>
+                    <li>✔️ Sistema automatizado de alertas de riesgo</li>
+                </ul>
+            </div>
+            <div class="caso-imagen">
+                <img src="inae.png" alt="Plataforma INAE" class="img-inae">
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SECCIÓN NOSOTROS ================= -->
+    <section id="nosotros" class="nosotros">
+        <div class="contenedor text-center">
+            <h3 class="titulo-seccion">Por qué elegir Solvex SpA</h3>
+            <p class="nosotros-texto">Nuestra misión es desarrollar soluciones tecnológicas innovadoras que transformen problemas complejos en oportunidades de mejora. Actuamos con transparencia y excelencia técnica, convirtiéndonos en el aliado estratégico que su organización necesita para una transformación digital exitosa.</p>
+        </div>
+    </section>
+
+    <!-- ================= SECCIÓN CONTACTO ================= -->
+    <section id="contacto" class="contacto">
+        <div class="contenedor">
+            <h3 class="titulo-seccion">Cotice su Proyecto</h3>
+            <div class="form-container">
+                <form class="formulario">
+                    <div class="input-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="empresa">Institución / Empresa</label>
+                        <input type="text" id="empresa" placeholder="Ej. Universidad de Chile" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Correo Institucional</label>
+                        <input type="email" id="email" placeholder="juan@institucion.cl" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="mensaje">Háblenos de su necesidad tecnológica</label>
+                        <textarea id="mensaje" rows="4" placeholder="Requerimos un sistema para optimizar..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-principal form-btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="contenedor footer-content">
+            <div class="footer-logo">
+                <h2>SOLVEX <span>SpA</span></h2>
+                <p>Soluciones tecnológicas a medida.</p>
+            </div>
+            <div class="footer-info">
+                <p>📍 Las Condes, Santiago</p>
+                <p>✉️ contacto@solvex.cl</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Solvex SpA. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    </body>
+</html>
