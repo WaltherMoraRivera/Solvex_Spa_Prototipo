@@ -578,7 +578,7 @@ ul { list-style: none; }
     box-shadow: var(--shadow-lg);
     transform-style: preserve-3d;
 }
-.img-inae { width: 100%; border-radius: var(--r-md); }
+.img-inae { width: 100%; height: auto; aspect-ratio: 1842 / 881; border-radius: var(--r-md); }
 
 /* =========================================================
    10. NOSOTROS
