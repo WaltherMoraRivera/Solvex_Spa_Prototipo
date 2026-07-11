@@ -25,6 +25,7 @@
     const navbar = document.getElementById("navbar");
     const navToggle = document.getElementById("navToggle");
     const navLinks = document.getElementById("navLinks");
+    const progress = document.getElementById("scrollProgress");
     let lastScroll = 0;
 
     function onScroll() {
@@ -37,22 +38,73 @@
             navbar.classList.remove("hidden");
         }
         lastScroll = y;
+        // Barra de progreso de scroll
+        if (progress) {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            progress.style.width = max > 0 ? `${(y / max) * 100}%` : "0%";
+        }
     }
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Menú móvil
+    // Menú móvil con focus trap y cierre con Escape
     if (navToggle) {
+        const focusables = () => navLinks.querySelectorAll("a");
+        let lastFocused = null;
+
+        const openMenu = () => {
+            navLinks.classList.add("open");
+            navToggle.setAttribute("aria-expanded", "true");
+            navToggle.setAttribute("aria-label", "Cerrar menú");
+            lastFocused = document.activeElement;
+            focusables()[0]?.focus();
+            document.addEventListener("keydown", onKeydown);
+        };
+        const closeMenu = (returnFocus = true) => {
+            navLinks.classList.remove("open");
+            navToggle.setAttribute("aria-expanded", "false");
+            navToggle.setAttribute("aria-label", "Abrir menú");
+            document.removeEventListener("keydown", onKeydown);
+            if (returnFocus) (lastFocused || navToggle).focus();
+        };
+        const onKeydown = (e) => {
+            if (e.key === "Escape") { closeMenu(); return; }
+            if (e.key === "Tab") {
+                const items = Array.from(focusables());
+                if (!items.length) return;
+                const first = items[0], last = items[items.length - 1];
+                if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+            }
+        };
+
         navToggle.addEventListener("click", () => {
-            const open = navLinks.classList.toggle("open");
-            navToggle.setAttribute("aria-expanded", String(open));
-            navToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+            navLinks.classList.contains("open") ? closeMenu() : openMenu();
         });
-        navLinks.querySelectorAll("a").forEach((a) =>
-            a.addEventListener("click", () => {
-                navLinks.classList.remove("open");
-                navToggle.setAttribute("aria-expanded", "false");
-            })
+        focusables().forEach((a) =>
+            a.addEventListener("click", () => closeMenu(false))
         );
+    }
+
+    /* ---------------------------------------------------------
+       2b. SCROLL-SPY (resalta la sección activa en el navbar)
+    --------------------------------------------------------- */
+    function initScrollSpy() {
+        const sections = document.querySelectorAll("main section[id]");
+        const linkFor = (id) => navLinks?.querySelector(`a[href="#${id}"]`);
+        if (!sections.length || !navLinks) return;
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+                const link = linkFor(e.target.id);
+                if (!link) return;
+                if (e.isIntersecting) {
+                    navLinks.querySelectorAll('a[aria-current="true"]')
+                        .forEach((a) => a.removeAttribute("aria-current"));
+                    link.setAttribute("aria-current", "true");
+                }
+            });
+        }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+        sections.forEach((s) => io.observe(s));
     }
 
     /* ---------------------------------------------------------
@@ -314,6 +366,7 @@
     /* --------------------------------------------------------- */
     function init() {
         onScroll();
+        initScrollSpy();
         initReveal();
         initCounters();
         initParticles();

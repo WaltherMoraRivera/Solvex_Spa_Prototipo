@@ -123,6 +123,22 @@ ul { list-style: none; }
 
 ::selection { background: var(--verde-turquesa); color: var(--azul-profundo); }
 
+/* Skip-link accesible (visible solo al enfocar con teclado) */
+.skip-link {
+    position: fixed; top: -60px; left: var(--sp-4); z-index: 2000;
+    background: var(--azul-profundo); color: #fff;
+    padding: var(--sp-3) var(--sp-4); border-radius: var(--r-sm);
+    font-weight: 600; transition: top var(--dur-1) var(--ease);
+}
+.skip-link:focus-visible { top: var(--sp-4); }
+
+/* Barra de progreso de scroll */
+.scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--grad-accent); z-index: 1500;
+    transition: width 0.1s linear;
+}
+
 /* =========================================================
    3. FONDO GLOBAL (blobs + noise)
 ========================================================= */
@@ -309,6 +325,10 @@ ul { list-style: none; }
 }
 .nav__links a:not(.btn-nav):hover { color: var(--azul-profundo); }
 .nav__links a:not(.btn-nav):hover::after { width: 100%; }
+/* Estado activo (scroll-spy) */
+.nav__links a:not(.btn-nav)[aria-current="true"] { color: var(--azul-profundo); }
+.nav__links a:not(.btn-nav)[aria-current="true"]::after { width: 100%; }
+.navbar:not(.scrolled) .nav__links a:not(.btn-nav)[aria-current="true"] { color: #fff; }
 
 .btn-nav {
     background: var(--grad-brand);
@@ -383,6 +403,48 @@ ul { list-style: none; }
 .section-divider { line-height: 0; margin-top: -1px; }
 .section-divider svg { width: 100%; height: clamp(40px, 6vw, 80px); display: block; }
 .section-divider path { fill: var(--gris-fondo); }
+
+/* =========================================================
+   7b. PRUEBA SOCIAL / CONFIANZA
+========================================================= */
+.trust { padding: var(--sp-8) 0; }
+.trust__inner { text-align: center; }
+.trust__label {
+    font-family: var(--font-display); font-size: var(--fs-eyebrow);
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--texto-suave);
+    margin-bottom: var(--sp-4);
+}
+.trust__items {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: var(--sp-3) var(--sp-8);
+}
+.trust__items li {
+    display: inline-flex; align-items: center; gap: var(--sp-2);
+    font-family: var(--font-display); font-weight: 600; font-size: var(--fs-body);
+    color: var(--azul-profundo);
+}
+.trust__items li span { color: var(--verde-turquesa); font-size: 0.6rem; }
+
+/* =========================================================
+   7c. CTA INTERMEDIO
+========================================================= */
+.cta-band { padding: var(--sp-8) 0; }
+.cta-band__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: var(--sp-6);
+    background: var(--grad-brand);
+    border-radius: var(--r-xl);
+    padding: clamp(2rem, 4vw, 3.5rem);
+    position: relative; overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+.cta-band__inner::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(500px circle at 85% 20%, rgba(93,202,165,0.28), transparent 60%);
+}
+.cta-band__title { position: relative; font-family: var(--font-display); font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.2rem); color: #fff; letter-spacing: -0.02em; text-wrap: balance; }
+.cta-band__text { position: relative; color: rgba(255,255,255,0.85); margin-top: var(--sp-2); }
+.cta-band__inner .btn { position: relative; flex-shrink: 0; }
 
 /* =========================================================
    8. SERVICIOS

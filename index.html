@@ -25,6 +25,12 @@
 </head>
 <body>
 
+    <!-- Salto de accesibilidad al contenido principal -->
+    <a href="#inicio" class="skip-link">Saltar al contenido</a>
+
+    <!-- Indicador de progreso de scroll -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
     <!-- ================= FONDO GLOBAL (blobs + noise) ================= -->
     <div class="bg-layer" aria-hidden="true">
         <div class="blob blob--1"></div>
@@ -107,6 +113,19 @@
         <div class="section-divider" aria-hidden="true">
             <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C360,90 1080,-10 1440,40 L1440,80 L0,80 Z"></path></svg>
         </div>
+
+        <!-- ================= PRUEBA SOCIAL / CONFIANZA ================= -->
+        <section class="trust" aria-label="Señales de confianza">
+            <div class="contenedor trust__inner" data-animate>
+                <p class="trust__label">Respaldado por resultados reales</p>
+                <ul class="trust__items">
+                    <li><span>●</span> Plataforma INAE en producción</li>
+                    <li><span>●</span> Gestión confidencial de datos</li>
+                    <li><span>●</span> Educación superior</li>
+                    <li><span>●</span> Desarrollo a medida</li>
+                </ul>
+            </div>
+        </section>
 
         <!-- ================= SERVICIOS ================= -->
         <section id="servicios" class="section servicios">
@@ -202,6 +221,20 @@
                     <div class="valor" data-animate><strong>Excelencia</strong><span>Estándares técnicos de primer nivel.</span></div>
                     <div class="valor" data-animate><strong>Cercanía</strong><span>Un aliado, no solo un proveedor.</span></div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ================= CTA INTERMEDIO ================= -->
+        <section class="cta-band" aria-label="Llamado a la acción">
+            <div class="contenedor cta-band__inner" data-animate>
+                <div>
+                    <h2 class="cta-band__title">¿Listo para transformar tu organización?</h2>
+                    <p class="cta-band__text">Conversemos sobre tu desafío tecnológico. Sin compromiso.</p>
+                </div>
+                <a href="#contacto" class="btn btn--primary" data-ripple>
+                    Cotizar ahora
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
             </div>
         </section>
 
