@@ -48,10 +48,18 @@
     /* Variante clara para texto sobre fondos azules (mejor contraste) */
     --grad-text-light: linear-gradient(120deg, #a9deff 0%, #7fe0c4 100%);
 
-    /* Sombras suaves */
-    --shadow-sm: 0 2px 8px rgba(12, 68, 124, 0.06);
-    --shadow-md: 0 12px 30px rgba(12, 68, 124, 0.10);
-    --shadow-lg: 0 24px 60px rgba(12, 68, 124, 0.16);
+    /* Sombras multicapa (profundidad realista tipo agencia) */
+    --shadow-sm:
+        0 1px 2px rgba(12, 68, 124, 0.05),
+        0 2px 6px rgba(12, 68, 124, 0.06);
+    --shadow-md:
+        0 2px 4px rgba(12, 68, 124, 0.05),
+        0 8px 16px rgba(12, 68, 124, 0.07),
+        0 16px 32px rgba(12, 68, 124, 0.07);
+    --shadow-lg:
+        0 4px 8px rgba(12, 68, 124, 0.05),
+        0 12px 24px rgba(12, 68, 124, 0.08),
+        0 28px 56px rgba(12, 68, 124, 0.12);
     --glow-accent: 0 0 40px rgba(93, 202, 165, 0.35);
 
     /* Tipografía */
@@ -690,6 +698,12 @@ ul { list-style: none; }
 /* =========================================================
    14. RESPONSIVE
 ========================================================= */
+/* Anchos intermedios (tablet horizontal): navbar más compacto */
+@media (min-width: 769px) and (max-width: 1000px) {
+    .nav__links { gap: 1.3rem; }
+    .nav__links a { font-size: 0.9rem; }
+}
+
 @media (max-width: 900px) {
     .footer__grid { grid-template-columns: 1fr 1fr; }
     .footer__brand { grid-column: 1 / -1; }

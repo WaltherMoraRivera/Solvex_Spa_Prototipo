@@ -43,7 +43,7 @@
     <header class="navbar" id="navbar">
         <div class="navbar__inner">
             <a href="#inicio" class="logo" aria-label="Solvex SpA — inicio">
-                <span class="logo__mark" aria-hidden="true"><img src="isotipo-trans.png" alt="" width="32" height="32"></span>
+                <span class="logo__mark" aria-hidden="true"><picture><source type="image/webp" srcset="isotipo-trans.webp"><img src="isotipo-trans.png" alt="" width="34" height="34"></picture></span>
                 <span class="logo__text">SOLVEX <span>SpA</span></span>
             </a>
 
@@ -199,7 +199,11 @@
                 </div>
                 <div class="caso-imagen" data-tilt data-animate>
                     <div class="caso-imagen__frame">
-                        <img src="inae.png" alt="Captura de la plataforma INAE" class="img-inae" loading="lazy" decoding="async">
+                        <picture>
+                            <source type="image/webp" srcset="inae-760.webp 760w, inae-1140.webp 1140w" sizes="(max-width: 768px) 90vw, 560px">
+                            <img src="inae.png" alt="Captura de la plataforma INAE" class="img-inae"
+                                 width="1842" height="881" loading="lazy" decoding="async">
+                        </picture>
                     </div>
                 </div>
             </div>
@@ -282,7 +286,7 @@
         <div class="contenedor footer__grid">
             <div class="footer__brand">
                 <a href="#inicio" class="logo">
-                    <span class="logo__mark" aria-hidden="true"><img src="isotipo-trans.png" alt="" width="32" height="32"></span>
+                    <span class="logo__mark" aria-hidden="true"><picture><source type="image/webp" srcset="isotipo-trans.webp"><img src="isotipo-trans.png" alt="" width="34" height="34"></picture></span>
                     <span class="logo__text">SOLVEX <span>SpA</span></span>
                 </a>
                 <p>Soluciones tecnológicas a medida para una transformación digital exitosa.</p>
