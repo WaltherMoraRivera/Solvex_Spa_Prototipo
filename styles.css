@@ -45,6 +45,8 @@
     --grad-brand: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-medio) 55%, #2f7ecb 100%);
     --grad-accent: linear-gradient(120deg, var(--verde-turquesa), #7fe0c4);
     --grad-text: linear-gradient(120deg, #2f7ecb 0%, var(--verde-turquesa) 100%);
+    /* Variante clara para texto sobre fondos azules (mejor contraste) */
+    --grad-text-light: linear-gradient(120deg, #a9deff 0%, #7fe0c4 100%);
 
     /* Sombras suaves */
     --shadow-sm: 0 2px 8px rgba(12, 68, 124, 0.06);
@@ -163,7 +165,7 @@ ul { list-style: none; }
 
 .grad-text {
     display: block;
-    background: var(--grad-text);
+    background: var(--grad-text-light);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -431,6 +433,8 @@ ul { list-style: none; }
     border-radius: clamp(24px, 4vw, 48px);
     width: min(1200px, 92%);
     margin: 0 auto;
+    padding-left: clamp(1.5rem, 5vw, 4rem);
+    padding-right: clamp(1.5rem, 5vw, 4rem);
     overflow: hidden;
     position: relative;
 }
@@ -439,6 +443,8 @@ ul { list-style: none; }
     background: radial-gradient(600px circle at 80% 10%, rgba(93,202,165,0.2), transparent 60%);
 }
 .nosotros .contenedor { position: relative; z-index: 1; width: 100%; }
+.text-center { text-align: center; }
+.valores { text-align: left; } /* las tarjetas de valores se mantienen alineadas a la izquierda */
 .nosotros-texto { font-size: 1.15rem; line-height: 1.85; color: rgba(255,255,255,0.85); max-width: 760px; margin: 1.2rem auto 0; }
 .valores { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1.4rem; margin-top: 3rem; }
 .valor {
