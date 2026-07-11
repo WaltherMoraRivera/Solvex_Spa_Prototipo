@@ -128,6 +128,96 @@
     }
 
     /* ---------------------------------------------------------
+       4b. RED DE PARTÍCULAS DEL HERO (canvas 2D)
+       Nodos conectados que evocan el átomo del logo. Optimizado:
+       DPR limitado, densidad según ancho, pausa fuera de viewport,
+       reactivo al puntero. Se desactiva con reduced-motion.
+    --------------------------------------------------------- */
+    function initParticles() {
+        const canvas = document.getElementById("heroCanvas");
+        if (!canvas || prefersReduced) return;
+        const ctx = canvas.getContext("2d", { alpha: true });
+        const hero = canvas.parentElement;
+
+        let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+        let nodes = [];
+        let running = true;
+        let raf = null;
+        const pointer = { x: -9999, y: -9999 };
+        const LINK_DIST = 130;
+
+        function resize() {
+            const r = hero.getBoundingClientRect();
+            w = r.width; h = r.height;
+            canvas.width = w * dpr; canvas.height = h * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            // densidad proporcional al área, con techo para performance
+            const count = Math.min(Math.round((w * h) / 16000), 90);
+            nodes = Array.from({ length: count }, () => ({
+                x: Math.random() * w, y: Math.random() * h,
+                vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
+                r: Math.random() * 1.8 + 0.8,
+            }));
+        }
+
+        function draw() {
+            if (!running) return;
+            ctx.clearRect(0, 0, w, h);
+            for (let i = 0; i < nodes.length; i++) {
+                const n = nodes[i];
+                n.x += n.vx; n.y += n.vy;
+                if (n.x < 0 || n.x > w) n.vx *= -1;
+                if (n.y < 0 || n.y > h) n.vy *= -1;
+
+                // leve atracción al puntero
+                const dxp = pointer.x - n.x, dyp = pointer.y - n.y;
+                const dp = Math.hypot(dxp, dyp);
+                if (dp < 160) { n.x += dxp * 0.0016; n.y += dyp * 0.0016; }
+
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(147, 224, 202, 0.7)";
+                ctx.fill();
+
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const m = nodes[j];
+                    const dx = n.x - m.x, dy = n.y - m.y;
+                    const d = Math.hypot(dx, dy);
+                    if (d < LINK_DIST) {
+                        ctx.beginPath();
+                        ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+                        ctx.strokeStyle = `rgba(180, 214, 255, ${0.14 * (1 - d / LINK_DIST)})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+            raf = requestAnimationFrame(draw);
+        }
+
+        hero.addEventListener("pointermove", (e) => {
+            const r = hero.getBoundingClientRect();
+            pointer.x = e.clientX - r.left; pointer.y = e.clientY - r.top;
+        });
+        hero.addEventListener("pointerleave", () => { pointer.x = pointer.y = -9999; });
+
+        window.addEventListener("resize", () => { resize(); });
+
+        // Pausar cuando el hero no está visible (ahorro de CPU)
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+                running = e.isIntersecting;
+                if (running && !prefersReduced) { cancelAnimationFrame(raf); draw(); }
+                else cancelAnimationFrame(raf);
+            });
+        }, { threshold: 0 });
+        io.observe(hero);
+
+        resize();
+        draw();
+    }
+
+    /* ---------------------------------------------------------
        5. SPOTLIGHT DEL HERO
     --------------------------------------------------------- */
     function initSpotlight() {
@@ -223,6 +313,7 @@
         onScroll();
         initReveal();
         initCounters();
+        initParticles();
         initSpotlight();
         initTilt();
         initRipple();

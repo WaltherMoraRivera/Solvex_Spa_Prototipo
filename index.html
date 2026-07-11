@@ -60,6 +60,7 @@
     <main>
         <!-- ================= HERO ================= -->
         <section id="inicio" class="hero">
+            <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
             <div class="hero__spotlight" aria-hidden="true"></div>
             <div class="hero__content">
                 <span class="pill" data-animate>
@@ -116,14 +117,21 @@
                     <p class="section__lead">Tecnología robusta, elegante y pensada para resolver los desafíos reales de tu institución.</p>
                 </header>
 
-                <div class="grid-servicios" id="gridServicios">
-                    <article class="card" data-tilt data-animate>
+                <div class="bento" id="gridServicios">
+                    <!-- Card destacada (ocupa dos filas): servicio insignia -->
+                    <article class="card card--feature" data-tilt data-animate>
                         <div class="card__glow" aria-hidden="true"></div>
-                        <div class="card__icon">
+                        <span class="card__tag">Servicio insignia</span>
+                        <div class="card__icon card__icon--lg">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/><path d="m7 9 2 2-2 2M13 13h4"/></svg>
                         </div>
                         <h3>Desarrollo a Medida</h3>
-                        <p>Plataformas robustas y eficientes, diseñadas específicamente para resolver los desafíos únicos de tu empresa.</p>
+                        <p>Plataformas robustas y eficientes, diseñadas específicamente para resolver los desafíos únicos de tu empresa. Desde el análisis hasta el despliegue, construimos software que se adapta a tus procesos y crece contigo.</p>
+                        <ul class="card__points">
+                            <li>Arquitectura escalable</li>
+                            <li>Código mantenible</li>
+                            <li>Entrega iterativa</li>
+                        </ul>
                     </article>
 
                     <article class="card" data-tilt data-animate>
@@ -144,7 +152,7 @@
                         <p>Conectamos tus plataformas actuales para lograr un flujo de información automatizado y sin interrupciones.</p>
                     </article>
 
-                    <article class="card" data-tilt data-animate>
+                    <article class="card card--wide" data-tilt data-animate>
                         <div class="card__glow" aria-hidden="true"></div>
                         <div class="card__icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="12" y="7" width="3" height="10"/><rect x="17" y="13" width="3" height="4"/></svg>
