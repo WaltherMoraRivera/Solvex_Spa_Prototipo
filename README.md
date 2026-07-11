@@ -185,6 +185,8 @@ Capa fija (`.bg-layer`) con tres **blobs** de color desenfocados en movimiento l
 - **Spotlight** que sigue el mouse (`--mx`/`--my` + `radial-gradient`).
 - Stats con **contador animado** desde 0.
 - Entrada animada con GSAP (stagger).
+- Espaciados compactos para que las **estadísticas sean visibles en la primera
+  vista** (above the fold), sin necesidad de hacer scroll.
 
 ### Prueba social
 Banda (`.trust`) con señales de confianza reales — sin inventar clientes.
@@ -195,14 +197,17 @@ Rompe la monotonía de "4 tarjetas iguales". Cada tarjeta:
 - Glassmorphism con **borde de luz superior** (truco de `mask` en `::before`).
 - **Glow celeste** que sigue el mouse.
 - **Mini red de partículas** animada solo en hover.
-- Elevación limpia al hover (sin inclinación 3D).
+- Al hover se **eleva y expande** ligeramente (`translateY` + `scale`), sin
+  inclinación 3D.
 
 ### Caso de éxito INAE
 Composición a 2 columnas con la captura real de la plataforma dentro de un marco glass
 con tilt 3D. Imagen servida en WebP responsive con `<picture>`.
 
 ### Nosotros
-Panel azul redondeado con glow y tarjetas de valores.
+Panel azul redondeado con tarjetas de valores. Al pasar el mouse sobre el panel
+se activan la **red de nodos** (variante clara para contrastar sobre el azul) y el
+**destacado celeste** que sigue al cursor, igual que en el hero y las tarjetas.
 
 ### CTA intermedio
 Banda de conversión (`.cta-band`) con gradiente y glow, antes del formulario.
@@ -234,7 +239,7 @@ const isTouch        = matchMedia("(hover: none)").matches;
 | **Reveal (GSAP)** | fade-up de secciones al entrar en viewport, con stagger en cards |
 | **Contadores** | count-up desde 0 al entrar en viewport |
 | **Partículas hero** | red de nodos en canvas, pausada fuera de viewport |
-| **Nodos por tarjeta** | mini red de partículas activa solo en hover (ahorra CPU) |
+| **Nodos por tarjeta/panel** | mini red de partículas activa solo en hover (servicios y panel Nosotros); variante `data-nodes="dark"` para fondos azules |
 | **Spotlight** | luz que sigue el mouse en el hero |
 | **Tilt 3D** | inclinación de la imagen INAE según el mouse |
 | **Ripple** | onda al hacer clic en botones |
@@ -430,7 +435,21 @@ input:not(:placeholder-shown) + label { transform: translateY(-1.15rem); font-si
 ```
 El `placeholder=" "` (un espacio) es el truco que activa `:not(:placeholder-shown)`.
 
-### 13. Respetar siempre `prefers-reduced-motion`
+### 13. Gotcha: GSAP deja `transform` inline y anula el `:hover` de CSS
+
+Si animas un elemento con GSAP (`gsap.to/fromTo` con `x`/`y`/`scale`) y luego
+quieres que su `:hover` de CSS aplique un `transform`, **no funcionará**: GSAP deja
+un `transform` **inline** al terminar, que por especificidad gana al CSS. Además,
+evita animar el mismo elemento dos veces (deja dos transforms inline). Soluciones:
+
+```js
+// al terminar la animación de entrada, limpia el transform inline:
+gsap.fromTo(cards, { opacity:0, y:50 },
+  { opacity:1, y:0, duration:.7, stagger:.12, clearProps:"transform" });
+```
+Así el `:hover { transform: translateY(-6px) scale(1.04) }` vuelve a tener efecto.
+
+### 14. Respetar siempre `prefers-reduced-motion`
 
 ```css
 @media (prefers-reduced-motion: reduce) {
