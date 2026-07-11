@@ -318,7 +318,10 @@
             if (!canvas) return;
             const ctx = canvas.getContext("2d", { alpha: true });
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            const LINK = 92;
+            const onDark = card.dataset.nodes === "dark";
+            const nodeColor = onDark ? "rgba(160, 232, 210, 0.95)" : "rgba(93, 202, 165, 0.9)";
+            const lineColor = onDark ? "190, 222, 255" : "47, 126, 203";
+            const LINK = onDark ? 130 : 92;
             const pointer = { x: -9999, y: -9999 };
             let nodes = [], raf = null, w = 0, h = 0;
 
@@ -345,7 +348,7 @@
                     if (Math.hypot(dxp, dyp) < 120) { n.x += dxp * 0.002; n.y += dyp * 0.002; }
                     ctx.beginPath();
                     ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-                    ctx.fillStyle = "rgba(93, 202, 165, 0.9)";
+                    ctx.fillStyle = nodeColor;
                     ctx.fill();
                     for (let j = i + 1; j < nodes.length; j++) {
                         const m = nodes[j];
@@ -353,7 +356,7 @@
                         if (d < LINK) {
                             ctx.beginPath();
                             ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
-                            ctx.strokeStyle = `rgba(47, 126, 203, ${0.3 * (1 - d / LINK)})`;
+                            ctx.strokeStyle = `rgba(${lineColor}, ${0.3 * (1 - d / LINK)})`;
                             ctx.lineWidth = 1;
                             ctx.stroke();
                         }

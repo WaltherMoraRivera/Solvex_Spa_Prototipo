@@ -94,7 +94,7 @@
     --fs-lead: clamp(1.08rem, 1rem + 0.4vw, 1.25rem);
     --fs-h3: clamp(1.2rem, 1.1rem + 0.5vw, 1.4rem);
     --fs-h2: clamp(2rem, 1.4rem + 2.6vw, 3.1rem);
-    --fs-display: clamp(2.6rem, 1.4rem + 5.4vw, 5rem);
+    --fs-display: clamp(2.4rem, 1.5rem + 4.4vw, 4.4rem);
     --measure: 65ch; /* medida de línea óptima para lectura */
 
     /* Espaciado de sección */
@@ -365,7 +365,7 @@ ul { list-style: none; }
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 8rem 1.5rem 4rem;
+    padding: 6rem 1.5rem 3rem;
     color: var(--blanco);
     overflow: hidden;
     background: var(--grad-brand);
@@ -390,13 +390,13 @@ ul { list-style: none; }
     font-weight: 700;
     line-height: 1.03;
     letter-spacing: -0.035em;
-    margin: var(--sp-6) 0 var(--sp-6);
+    margin: var(--sp-4) 0 var(--sp-4);
     text-wrap: balance;
 }
-.hero__subtitle { font-size: clamp(1.05rem, 2vw, 1.3rem); color: rgba(255,255,255,0.85); max-width: 640px; margin: 0 auto; }
-.hero__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.4rem; }
+.hero__subtitle { font-size: clamp(1.02rem, 1.6vw, 1.2rem); color: rgba(255,255,255,0.85); max-width: 640px; margin: 0 auto; }
+.hero__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: var(--sp-6); }
 
-.hero__stats { display: flex; gap: clamp(1.5rem, 5vw, 4rem); justify-content: center; flex-wrap: wrap; margin-top: 3.5rem; }
+.hero__stats { display: flex; gap: clamp(1.5rem, 5vw, 4rem); justify-content: center; flex-wrap: wrap; margin-top: var(--sp-8); }
 .hero__stat { text-align: center; }
 .hero__stat .counter { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--verde-turquesa); display: block; }
 .hero__stat p { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 0.2rem; }
@@ -502,9 +502,11 @@ ul { list-style: none; }
 /* Contenido siempre por encima del glow y de los nodos */
 .card > *:not(.card__glow):not(.card__nodes) { position: relative; z-index: 1; }
 
-.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); }
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px) scale(1.03); z-index: 2; }
 .card:hover .card__glow { opacity: 1; }
 .card:hover .card__nodes { opacity: 1; }
+/* Red de nodos también en el panel Nosotros al hover */
+.nosotros:hover .card__nodes { opacity: 1; }
 .card__icon {
     width: 60px; height: 60px; border-radius: var(--r-md);
     display: grid; place-items: center;
