@@ -144,7 +144,7 @@
         let running = true;
         let raf = null;
         const pointer = { x: -9999, y: -9999 };
-        const LINK_DIST = 130;
+        const LINK_DIST = 150;
 
         function resize() {
             const r = hero.getBoundingClientRect();
@@ -156,7 +156,7 @@
             nodes = Array.from({ length: count }, () => ({
                 x: Math.random() * w, y: Math.random() * h,
                 vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
-                r: Math.random() * 1.8 + 0.8,
+                r: Math.random() * 2.4 + 1.4,
             }));
         }
 
@@ -176,8 +176,11 @@
 
                 ctx.beginPath();
                 ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-                ctx.fillStyle = "rgba(147, 224, 202, 0.7)";
+                ctx.fillStyle = "rgba(160, 232, 210, 0.95)";
+                ctx.shadowColor = "rgba(93, 202, 165, 0.7)";
+                ctx.shadowBlur = 6;
                 ctx.fill();
+                ctx.shadowBlur = 0;
 
                 for (let j = i + 1; j < nodes.length; j++) {
                     const m = nodes[j];
@@ -186,8 +189,8 @@
                     if (d < LINK_DIST) {
                         ctx.beginPath();
                         ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
-                        ctx.strokeStyle = `rgba(180, 214, 255, ${0.14 * (1 - d / LINK_DIST)})`;
-                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = `rgba(190, 222, 255, ${0.32 * (1 - d / LINK_DIST)})`;
+                        ctx.lineWidth = 1.2;
                         ctx.stroke();
                     }
                 }
