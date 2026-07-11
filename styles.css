@@ -490,11 +490,21 @@ ul { list-style: none; }
     overflow: hidden;
 }
 .card__glow {
-    position: absolute; inset: 0; opacity: 0; transition: opacity 0.35s var(--ease);
+    position: absolute; inset: 0; z-index: 0; opacity: 0; transition: opacity 0.35s var(--ease);
     background: radial-gradient(320px circle at var(--gx,50%) var(--gy,0%), rgba(93,202,165,0.16), transparent 60%);
 }
-.card:hover { box-shadow: var(--shadow-lg); }
+/* Red de nodos por tarjeta (se activa al hover) */
+.card__nodes {
+    position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;
+    border-radius: inherit; opacity: 0; pointer-events: none;
+    transition: opacity 0.35s var(--ease);
+}
+/* Contenido siempre por encima del glow y de los nodos */
+.card > *:not(.card__glow):not(.card__nodes) { position: relative; z-index: 1; }
+
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); }
 .card:hover .card__glow { opacity: 1; }
+.card:hover .card__nodes { opacity: 1; }
 .card__icon {
     width: 60px; height: 60px; border-radius: var(--r-md);
     display: grid; place-items: center;

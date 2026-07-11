@@ -306,6 +306,79 @@
     }
 
     /* ---------------------------------------------------------
+       6b. RED DE NODOS POR TARJETA (servicios)
+       Al pasar el mouse: se mantiene el glow celeste y se anima una
+       mini red de partículas dentro de la tarjeta (rAF solo mientras
+       está en hover, para no gastar CPU). Reemplaza al tilt 3D.
+    --------------------------------------------------------- */
+    function initCards() {
+        document.querySelectorAll("[data-nodes]").forEach((card) => {
+            const glow = card.querySelector(".card__glow");
+            const canvas = card.querySelector(".card__nodes");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d", { alpha: true });
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const LINK = 92;
+            const pointer = { x: -9999, y: -9999 };
+            let nodes = [], raf = null, w = 0, h = 0;
+
+            function setup() {
+                const r = card.getBoundingClientRect();
+                w = r.width; h = r.height;
+                canvas.width = w * dpr; canvas.height = h * dpr;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                const count = Math.min(Math.round((w * h) / 9000), 28);
+                nodes = Array.from({ length: count }, () => ({
+                    x: Math.random() * w, y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+                    r: Math.random() * 1.5 + 1,
+                }));
+            }
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                for (let i = 0; i < nodes.length; i++) {
+                    const n = nodes[i];
+                    n.x += n.vx; n.y += n.vy;
+                    if (n.x < 0 || n.x > w) n.vx *= -1;
+                    if (n.y < 0 || n.y > h) n.vy *= -1;
+                    const dxp = pointer.x - n.x, dyp = pointer.y - n.y;
+                    if (Math.hypot(dxp, dyp) < 120) { n.x += dxp * 0.002; n.y += dyp * 0.002; }
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(93, 202, 165, 0.9)";
+                    ctx.fill();
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const m = nodes[j];
+                        const d = Math.hypot(n.x - m.x, n.y - m.y);
+                        if (d < LINK) {
+                            ctx.beginPath();
+                            ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+                            ctx.strokeStyle = `rgba(47, 126, 203, ${0.3 * (1 - d / LINK)})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                raf = requestAnimationFrame(draw);
+            }
+            function start() { if (prefersReduced) return; setup(); cancelAnimationFrame(raf); draw(); }
+            function stop() { cancelAnimationFrame(raf); raf = null; ctx.clearRect(0, 0, w, h); pointer.x = pointer.y = -9999; }
+
+            card.addEventListener("pointerenter", start);
+            card.addEventListener("pointerleave", stop);
+            card.addEventListener("pointermove", (e) => {
+                const r = card.getBoundingClientRect();
+                const px = e.clientX - r.left, py = e.clientY - r.top;
+                pointer.x = px; pointer.y = py;
+                if (glow) {
+                    glow.style.setProperty("--gx", `${(px / r.width) * 100}%`);
+                    glow.style.setProperty("--gy", `${(py / r.height) * 100}%`);
+                }
+            });
+        });
+    }
+
+    /* ---------------------------------------------------------
        7. RIPPLE EN BOTONES
     --------------------------------------------------------- */
     function initRipple() {
@@ -372,6 +445,7 @@
         initParticles();
         initSpotlight();
         initTilt();
+        initCards();
         initRipple();
         initForm();
     }
