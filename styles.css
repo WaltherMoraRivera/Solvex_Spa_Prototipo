@@ -502,11 +502,16 @@ ul { list-style: none; }
 /* Contenido siempre por encima del glow y de los nodos */
 .card > *:not(.card__glow):not(.card__nodes) { position: relative; z-index: 1; }
 
-.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px) scale(1.03); z-index: 2; }
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px) scale(1.04); z-index: 2; }
 .card:hover .card__glow { opacity: 1; }
 .card:hover .card__nodes { opacity: 1; }
-/* Red de nodos también en el panel Nosotros al hover */
+/* Red de nodos y destacado celeste también en el panel Nosotros al hover */
 .nosotros:hover .card__nodes { opacity: 1; }
+.nosotros:hover .card__glow { opacity: 1; }
+/* Glow más intenso y amplio para que destaque sobre el fondo azul */
+.nosotros .card__glow {
+    background: radial-gradient(420px circle at var(--gx,50%) var(--gy,50%), rgba(93,202,165,0.30), transparent 62%);
+}
 .card__icon {
     width: 60px; height: 60px; border-radius: var(--r-md);
     display: grid; place-items: center;

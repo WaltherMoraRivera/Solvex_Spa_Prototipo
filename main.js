@@ -124,8 +124,10 @@
         gsap.to(heroItems, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.12, delay: 0.15 });
 
         // Resto de secciones al entrar en viewport
+        // (las tarjetas de servicios se animan aparte con el batch de abajo;
+        //  se excluyen aquí para no dejar dos transforms inline que anulen el :hover)
         gsap.utils.toArray("[data-animate]").forEach((el) => {
-            if (el.closest("#inicio")) return;
+            if (el.closest("#inicio") || el.closest("#gridServicios")) return;
             gsap.fromTo(el,
                 { opacity: 0, y: 40 },
                 {
@@ -135,13 +137,15 @@
             );
         });
 
-        // Stagger específico para las tarjetas de servicios
+        // Stagger específico para las tarjetas de servicios.
+        // clearProps: "transform" elimina el transform inline al terminar,
+        // dejando que el hover de CSS (elevación + escala) funcione.
         ScrollTrigger.batch("#gridServicios .card", {
             start: "top 88%",
             onEnter: (batch) =>
                 gsap.fromTo(batch,
                     { opacity: 0, y: 50 },
-                    { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12, overwrite: true }
+                    { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12, overwrite: true, clearProps: "transform" }
                 ),
         });
     }
